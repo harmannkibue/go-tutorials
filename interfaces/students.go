@@ -48,5 +48,4 @@ func main() {
 		hum.setInfo()
 		fmt.Println(hum.getInfo())
 	}
-
 }
