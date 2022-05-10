@@ -1,4 +1,9 @@
-package interfaces
+package main
+
+import (
+	"fmt"
+	"math"
+)
 
 type Shape interface {
 	Area() float64
@@ -22,13 +27,13 @@ type Circle struct {
 }
 
 func (c Circle) Area() float64 {
-	return math.pi * c.radius * c.radius
+	return math.Pi * c.radius * c.radius
 }
 
 func (c Circle) Perimeter() float64 {
-	return math.pi * (c.radius * 2)
+	return math.Pi * (c.radius * 2)
 }
 
 func main() {
-
+	fmt.Println("The shapes module")
 }
