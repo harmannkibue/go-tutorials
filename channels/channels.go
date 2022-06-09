@@ -1,6 +1,16 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math/rand"
+	"sync"
+	"time"
+)
+
+func doWork(i int) int {
+	time.Sleep(time.Second)
+	return rand.Intn(1000)
+}
 
 func main() {
 	data_channel := make(chan int)
@@ -16,14 +26,20 @@ func main() {
 
 	//Data channel should be able to read and write concurrently
 	go func() {
-		for i := 0; i <= 100; i++ {
-			data_channel <- i
+		wg := sync.WaitGroup{}
+		for i := 0; i <= 10; i++ {
+			wg.Add(1)
+			go func() {
+				defer wg.Done()
+				result := doWork(i)
+				data_channel <- result
+			}()
 		}
-		close(data_channel)
+		wg.Wait()
+		defer close(data_channel)
 	}()
 
 	for data := range data_channel {
 		fmt.Println(data)
 	}
-
 }
