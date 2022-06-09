@@ -12,7 +12,7 @@ func main() {
 }
 
 func addValue(c context.Context) context.Context {
-	return context.WithValue(c, "key name", "{test_data: harman kibue}")
+	return context.WithValue(c, "key name", "{test_data: Armara Wamboi}")
 }
 
 func readValue(c context.Context) {
