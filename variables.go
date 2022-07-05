@@ -1,13 +1,18 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sync"
+)
 
 func main() {
-	const LENGTH int = 10
-	const WIDTH int = 5
-	var area int
+	wg := sync.WaitGroup{}
+	wg.Add(1)
+	go hello("Armara", &wg)
+	wg.Wait()
+}
 
-	area = LENGTH * WIDTH
-	fmt.Printf("value of area : %d", area)
-	fmt.Println()
+func hello(name string, wg *sync.WaitGroup) {
+	defer wg.Done()
+	fmt.Println("Hello ", name)
 }
